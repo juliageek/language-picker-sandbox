@@ -1,0 +1,22 @@
+{% macro render() %}
+
+{% set lang = '' %}
+{% set activeLocale = apos.workflow.lang() %}
+{% for l in apos.workflow.localizations() %}
+{% if l.workflowLocale === activeLocale %}
+  {% set lang = l.label %}
+{% endif %}
+{% endfor %}
+<button class="language-button" type="button" data-role="lang-toggle">
+  <span class="language-span">{{ lang }}</span>
+</button>
+<ul data-role="lang-list" class="language-list hidden">
+{% for locale in apos.workflow.localizations() %}
+  {% if locale.workflowLocale !== activeLocale %}
+    <li>
+      <a href="{{ locale._url | build({ workflowLocale: locale.workflowLocale }) }}" >{{ locale.label }}</a>
+    </li>
+  {% endif %}
+{% endfor %}
+</ul>
+{% endmacro %}

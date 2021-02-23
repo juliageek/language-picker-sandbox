@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+{% import 'macros/masthead.html' as masthead %}
+{% set piece = data.piece %}
+{% import 'macros/breadcrumbs.html' as breadcrumbs %}
+
+{% block main %}
+  <div class="article-body">
+    {{ breadcrumbs.render(data.page) }}
+    {{ apos.area(data.page, 'body', {
+      widgets: {
+        'apostrophe-rich-text': {
+          toolbar: [ 'Styles', 'Bold', 'Italic', 'Blockquote' ],
+          styles: [
+            { name: 'Heading', element: 'h2'},
+            { name: 'Subheading', element: 'h3'},
+            {
+              element: 'p',
+              name: 'Paragraph',
+              attributes: { class: 'article-text' }
+            },
+            {
+              element: 'p',
+              name: 'Highlighted text',
+              attributes: { class: 'highlighted-text' }
+            }
+          ]
+        }
+      }
+    }) }}
+  </div>
+{% endblock %}

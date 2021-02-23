@@ -1,0 +1,42 @@
+{# Automatically extends the right outer layout and also handles AJAX siutations #}
+{% extends data.outerLayout %}
+{% import 'macros/language-picker.html' as languagePicker %}
+
+{% block title %}
+  {# Create a useful, SEO-friendly title tag based on what we have #}
+  {% if data.piece %}
+    {{ data.piece.title }}
+  {% elseif data.page %}
+    {{ data.page.title }}
+  {% else %}
+    {{ apos.log('Looks like you forgot to override the title block in a template that does not have access to an Apostrophe page or piece.') }}
+  {% endif %}
+{% endblock %}
+
+{% block extraHead %}
+  {#
+    This block outputs its contents in the HTML document's <head>.
+    It is a good place to put extra <script> <link> and <meta> tags.
+  #}
+{% endblock %}
+
+{% block beforeMain %}
+  <div class="site-navigation">
+  <div class="links">
+    <ul>
+      <li><a href="/blog-one">Blog One</a></li>
+    </ul>
+  </div>
+    <div class="language-select">
+       {{ languagePicker.render() }}
+    </div>
+  </div>
+{% endblock %}
+
+{% block main %}{% endblock %}
+
+{% block afterMain %}
+  {#
+    This would be a great place to put a global footer.
+  #}
+{% endblock %}
