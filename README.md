@@ -1,54 +1,18 @@
-# Apostrophe Boilerplate v2.x
+# About the project
+The project tries to replicate the structure I have in a bigger project, which is the following:
+1. I have both `apostrophe-workflow` and `apostrophe-i18n-static` on the project.
+2. I also have a blog module, which extends `apostrophe-blog`, which is not a child of the Home page, (there will multiple blogs in the end).
+3. In `layout.html`, I have a language picker, which is a macro. In the macro, I call `apos.workflow.localizations()` to get the locales list. Based on logging I've done, this method returns results on the Home page, but no results on the blog page.
 
-Apostrophe Boilerplate is a minimal starting point for [Apostrophe 2](https://github.com/apostrophecms/apostrophe) projects.
 
-To get started, we recommend taking a look at [our guide to creating your first project](http://apostrophecms.org/docs/tutorials/getting-started/creating-your-first-project.html). You could also take a look at [Apostrophe's CLI](https://github.com/apostrophecms/apostrophe) or simply fork this repository.
+# How to run the project
 
-Once you have a local copy of this project to work from, make sure to install its dependencies with `npm install`. With Apostrophe installed, the first thing to do create an admin user account so you're able to log into the CMS. Run the following command (this will prompt you for a password).
++ Install npm dependencies: `npm install`
++ Run Docker containers: `docker-compose up`
++ Use the `lang-picker.tar.gz` file to restore the database
++ Run `nodemon` to see it live
 
-```bash
-node app.js apostrophe-users:add admin admin
-```
-
-Now you're all set! Just run `node app.js` to start up the local server and head to `localhost:3000` in your web browser.
-
----------------
-
-For more documentation on Apostrophe, visit the [A2 documentation site](http://apostrophecms.com).
-
-## Getting started with Docker
-
-If you prefer, you can run Apostrophe inside a Docker container with the provided configuration in `Dockerfile` and `docker-compose.yml`.
-
-**These aren't meant to be perfect for all situations.** As written, they are well-suited to running Apostrophe and MongoDB under docker in a single-server environment. For a development environment, you would probably want the entire folder to be in a mounted volume so that your code changes are visible as you go along, and you would probably want to work `nodemon`, `webpack` or `apostrophe-monitor` into the mix for automatic reloading.
-
-1. Install Docker on your computer, of course. On MacOS you must install the official Docker Desktop, not homebrew, as the latter relies on virtualbox and virtualbox file sharing is not compatible with persisting a MongoDB database in a container. If this is your first time, **Be sure to actually launch Docker Desktop** before running the commands that follow.
-
-2. Type:
-
-```bash
-docker-compose up
-```
-
-3. When you see:
-
-```
-Listening at http://localhost:3000
-```
-
-You can connect normally in your browser by going to that address.
-
-4. You will note there is no `admin` account in the database yet. Let's fix that. We'll execute an Apostrophe command line task inside the container:
-
-```
-docker-compose exec apostrophe node app apostrophe-users:add admin admin
-```
-
-You can shut Apostrophe down at any time with:
-
-```bash
-docker-compose stop
-```
-
-When you start it up again, your uploaded files and your database will still be there.
+# How to reproduce the issue I have
++ In the home page, notice that the languages are populated in the language-picker on the top right side. 
++ Click on the **Blog One** link. Observe that the language-picker has no languages anymore.
 
